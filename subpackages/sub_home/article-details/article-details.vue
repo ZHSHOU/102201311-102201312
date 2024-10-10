@@ -15,7 +15,7 @@ const travelUtils = uniCloud.importObject("travel-utils", {
 const loadState = ref<boolean>(true);
 const artId = ref<string>("");
 const detailData = ref<ArticleType>();
-const richText = ref<string>("");
+const richText = ref<string>("");我
 const isLike = ref<boolean>(false);
 const lastTime = ref<number>(0);
 
@@ -112,6 +112,172 @@ onLoad((option) => {
 	getData();
 	readUpdate()
 })
+
+// --------------------------------------留言板
+
+import CComment from "@/components/cc-comment/index";
+import { ref } from "vue";
+
+// 唤起新评论弹框
+let ccRef = ref(null);
+function openComment() {
+  ccRef.value.newCommentFun();
+}
+
+// 点赞回调事件
+function likeFun({ params }, callback) {
+  console.log("likeFun", params);
+  // 当请求失败, 调用callback重置点赞效果;
+  // Demo如下:
+  // axios.post("http://xxx/like", { id: params }).then((res) => {
+  //   if (res.code !== 0) {
+  //     callback(res);
+  //   }
+  // });
+}
+
+// 评论回调事件
+function replyFun({ params }, callback) {
+  console.log("replyFun", params);
+  // 当请求成功, 调用callback执行评论插入;
+  // Demo如下:
+  // axios.post("http://xxx/reply", { ...params }).then((res) => {
+  //   if (res.code === 0) {
+  //     callback(res);
+  //   }
+  // });
+  const res = { id: Math.random() }; // 很重要的回参! 必须拿到后端返回评论id! 删除需要!
+  setTimeout(() => callback(res), 500); // 目前为了展示效果, 直接执行callback
+}
+
+/** 删除回调事件
+ * mode 删除模式
+ * -- bind: 当被删除的一级评论存在回复评论, 那么该评论内容变更显示为[当前评论内容已被移除]
+ * -- only: 仅删除当前评论(后端删除相关联的回复评论, 否则总数显示不对)
+ * -- all : 删除所有评论包括回复评论
+ */
+const deleteMode = ref("all");
+function deleteFun({ params, mode }, callback) {
+  console.log("deleteFun", { params, mode });
+  // 当请求成功, 调用callback执行评论删除;
+  switch (deleteMode) {
+    case "bind":
+      // 逻辑: 调用接口进行评论内容修改 update
+      setTimeout(() => callback(), 500); // 目前为了展示效果, 直接执行callback
+      break;
+    case "only":
+      // 逻辑: 调用接口删除一个评论 delete
+      setTimeout(() => callback(), 500); // 目前为了展示效果, 直接执行callback
+      break;
+    default:
+      // all
+      // 逻辑: 调用接口删除多个评论 [delete]
+      // Demo如下:
+      // axios.post("http://xxx/delete", { ids: params }).then((res) => {
+      //   if (res.code === 0) {
+      //     callback(res);
+      //   }
+      // });
+      setTimeout(() => callback(), 500); // 目前为了展示效果, 直接执行callback
+      break;
+  }
+}
+
+// ----模拟数据------模拟数据------模拟数据----
+// 作者信息(提示: 一般来自localstorage, 如果是实时获取的话, 那么获取到数据后再v-if显示评论组件)
+let userInfo = ref({
+  id: 120, // 评论id
+  user_name: "uesr", // 用户名
+  user_avatar:
+    "https://s2.loli.net/2024/10/10/aTg1NLHBmwnEAh6.jpg", // 用户头像
+});
+let tableTotal = ref(6); // 评论总数
+let tableData = ref([
+  {
+    id: 120, // 评论id
+    parent_id: null, // 父级评论id
+    reply_id: null, // 被回复人评论id
+    reply_name: null, // 被回复人名称
+    user_name: "陈言泷", // 用户名
+    user_avatar:
+      "https://s2.loli.net/2024/10/10/SOqaM41PAxf6uXk.jpg", // 评论者头像地址
+    user_content: "有意向加入的同学可以通过邮箱联系我", // 评论内容
+    is_like: false, // 是否点赞
+    like_count: 120, // 点赞数统计
+    create_time: "2024-10-10 09:16", // 创建时间
+  },
+  {
+    id: 130,
+    parent_id: 120, // 评论的父级id
+    reply_id: 120, // 被回复评论id
+    reply_name: "陈言泷", // 被回复人名称
+    user_name: "张硕", // 用户名
+    user_avatar:
+      "https://s2.loli.net/2024/10/10/zDrKbt9gENhpQao.jpg", // 评论者头像地址
+    user_content: "弱弱地问一下人满了吗？", // 评论内容
+    is_like: false, // 是否点赞
+    like_count: 67, // 点赞数统计
+    create_time: "2024-10-10 09:20", // 创建时间
+  },
+  {
+    id: 140,
+    parent_id: 120, // 评论的父级id
+    reply_id: 130, // 被回复评论id
+    reply_name: "张硕", // 被回复人名称
+    user_name: "张俊超", // 用户名
+    user_avatar:
+      "https://s2.loli.net/2024/10/10/mBOyfMloGsEPA9U.jpg", // 评论者头像地址
+    user_content: "+1，我也问问", // 评论内容
+    is_like: false, // 是否点赞
+    like_count: 16, // 点赞数统计
+    create_time: "2024-10-10 10:26", // 创建时间
+  },
+  {
+    id: 150,
+    parent_id: 120, // 评论的父级id
+    reply_id: 130, // 被回复评论id
+    reply_name: "张俊超", // 被回复人名称
+    user_name: "陈言泷", // 用户名
+    user_avatar:
+      "https://s2.loli.net/2024/10/10/SOqaM41PAxf6uXk.jpg", // 评论者头像地址
+    user_content: "目前人数（3/5），可以邮件我，我们具体聊聊", // 评论内容
+    is_like: false, // 是否点赞
+    like_count: 16, // 点赞数统计
+    create_time: "2024-10-10 10:30", // 创建时间
+  },
+  {
+    id: 140,
+    parent_id: 120, // 评论的父级id
+    reply_id: 130, // 被回复评论id
+    reply_name: "张硕", // 被回复人名称
+    user_name: "陈言泷", // 用户名
+    user_avatar:
+      "https://s2.loli.net/2024/10/10/SOqaM41PAxf6uXk.jpg", // 评论者头像地址
+    user_content: "目前人数（3/5），可以邮件我，我们具体聊聊", // 评论内容
+    is_like: false, // 是否点赞
+    like_count: 16, // 点赞数统计
+    create_time: "2024-10-10 10:31", // 创建时间
+  },
+  {
+    id: 160,
+    parent_id: null, // 评论的父级id
+    reply_id: null, // 被回复评论id
+    reply_name: null, // 被回复人名称
+    user_name: "陈尚冰", // 用户名
+    user_avatar:
+      "https://s2.loli.net/2024/10/10/SuF3fEy4DThZtAP.jpg", // 评论者头像地址
+    user_content:
+      "我有两个问题：1.楼主目前的水平。2.是否还缺编程手。期待回复", // 评论内容
+    is_like: true, // 是否点赞
+    like_count: 8, // 点赞数统计
+    create_time: "2024-10-10 17:31", // 创建时间
+  },
+  
+]); 
+
+// --------------------------------------留言板
+
+
 </script>
 
 <template>
@@ -153,10 +319,36 @@ onLoad((option) => {
 			<view class="view-count-bar">
 				<text class="view-count">{{ detailData.view_count }}人看过</text>
 			</view>
+			
+			
+			<!-- 评论区组件 -->
+			<view class="btn" @tap="openComment">发一条新留言</view>
+			<CComment
+			    ref="ccRef"
+			    v-model:userInfo="userInfo"
+			    v-model:tableData="tableData"
+			    v-model:tableTotal="tableTotal"
+			    @likeFun="likeFun"
+			    @replyFun="replyFun"
+			    @deleteFun="deleteFun"
+			    :deleteMode="deleteMode"
+			  ></CComment>
 		</view>
 	</view>
 </template>
 
-<style lang="scss" scoped>
-	@import "./index.scss"
-</style>
+
+
+
+<style lang="scss" scoped>  
+  @import "./index.scss";  
+  
+  .btn {
+    text-align: center;  
+    color: #fff;  
+    padding: 20rpx;  
+    margin: 20rpx;  
+    border-radius: 20rpx;  
+    background-color: #2979ff;  
+  }  
+</style>  
