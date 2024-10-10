@@ -1,0 +1,7 @@
+{
+  "name": "travel-utils",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

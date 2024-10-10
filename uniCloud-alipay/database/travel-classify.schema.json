@@ -1,0 +1,87 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": [
+		"user_id",
+		"categoryName"
+	],
+	"permission": {
+		"read": true,
+		"create": "auth.uid != null",
+		"update": "doc.user_id == auth.uid",
+		"delete": "doc.user_id == auth.uid"
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"user_id": {
+			"bsonType": "string",
+			"description": "分类作者ID， 参考`uni-id-users` 表",
+			"foreignKey": "uni-id-users._id",
+			"defaultValue": {
+				"$env": "uid"
+			}
+		},
+		"categoryName": {
+			"bsonType": "string",
+			"title": "类别名称",
+			"description": "类别名称",
+			"label": "类别名称",
+			"trim": "both"
+		},
+		"remark": {
+			"bsonType": "string",
+			"title": "备注",
+			"description": "备注",
+			"label": "备注",
+			"trim": "both"
+		},
+		"fileList": {
+			"bsonType": "array",
+			"title": "轮播图所需图片",
+			"description": "轮播图所需图片",
+			"label": "轮播图所需图片"
+		},
+		"delete_status": {
+			"bsonType": "int",
+			"title": "删除状态",
+			"description": "假删操作，0 已删除 1 未删除",
+			"defaultValue": 1,
+			"enum": [
+				{
+					"value": 0,
+					"text": "已删除"
+				},
+				{
+					"value": 1,
+					"text": "未删除"
+				}
+			]
+		},
+		"publish_date": {
+			"bsonType": "timestamp",
+			"title": "发表时间",
+			"description": "发表时间",
+			"defaultValue": {
+				"$env": "now"
+			}
+		},
+		"publish_ip": {
+			"bsonType": "string",
+			"title": "发布分类时IP地址",
+			"description": "发表时 IP 地址",
+			"forceDefaultValue": {
+				"$env": "clientIP"
+			}
+		},
+		"last_modify_date": {
+			"bsonType": "timestamp",
+			"title": "最后修改时间",
+			"description": "最后修改时间",
+			"defaultValue": {
+				"$env": "now"
+			}
+		}
+	}
+}

@@ -1,0 +1,58 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": [
+		"user_id",
+		"version_content",
+		"excerpt"
+	],
+	"permission": {
+		"read": true,
+		"create": "auth.uid != null",
+		"update": "doc.user_id == auth.uid",
+		"delete": "doc.user_id == auth.uid"
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"user_id": {
+			"bsonType": "string",
+			"description": "发布版本作者ID， 参考`uni-id-users` 表",
+			"foreignKey": "uni-id-users._id",
+			"defaultValue": {
+				"$env": "uid"
+			}
+		},
+		"version_content": {
+			"bsonType": "string",
+			"title": "版本内容",
+			"description": "版本内容",
+			"label": "版本内容",
+			"trim": "right"
+		},
+		"excerpt": {
+			"bsonType": "string",
+			"title": "文章摘录",
+			"description": "文章摘录",
+			"label": "摘要",
+			"trim": "both"
+		},
+		"publish_date": {
+			"bsonType": "timestamp",
+			"title": "发表时间",
+			"description": "发表时间",
+			"defaultValue": {
+				"$env": "now"
+			}
+		},
+		"publish_ip": {
+			"bsonType": "string",
+			"title": "发布文章时IP地址",
+			"description": "发表时 IP 地址",
+			"forceDefaultValue": {
+				"$env": "clientIP"
+			}
+		}
+	}
+}

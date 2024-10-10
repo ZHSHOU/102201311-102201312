@@ -1,0 +1,46 @@
+.content {
+	
+	.list {
+		.li {
+			margin-bottom: 10rpx;
+			padding: 20rpx 30rpx;
+			background: #fff;
+			
+			.li-title {
+				font-size: 30rpx;
+				font-weight: bold;
+				color: $uni-color-black;
+			}
+			
+			.li-foot {
+				display: flex;
+				justify-content: space-between;
+				color: $uni-text-color-placeholder;
+				padding-top: 16rpx;
+				
+				.li-time {
+					font-size: 26rpx;
+				}
+				
+				.more-action {
+					line-height: 36rpx;
+					padding: 6rpx 20rpx;
+					background: $uni-bgcolor-nav;
+					color: $uni-color-theme;
+					border-radius: 6rpx;
+				}
+				
+				.more-action:active {
+					background: $uni-text-color-custom2;
+				}
+			}
+		}
+		
+		.load-text {
+			padding: 30rpx;
+			text-align: center;
+			font-size: 28rpx;
+			color: $uni-text-color-grey;
+		}
+	}
+}

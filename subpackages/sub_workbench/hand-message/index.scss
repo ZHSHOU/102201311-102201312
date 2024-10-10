@@ -1,0 +1,46 @@
+.content {
+	padding: 30rpx;
+	
+	.header {
+		position: relative;
+		height: 70rpx;
+		width: 100%;
+		
+		.submit-btn {
+			font-size: 28rpx;
+			width: 160rpx;
+			height: 70rpx;
+			line-height: 70rpx;
+			background: $uni-color-theme;
+			color: #fff !important;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+		
+		button::after {
+			border: none;
+		} 
+		
+		button[disabled]{
+			background-color: #bcbcbc !important;
+		}
+	}
+	
+	.feed-title {
+		font-size: 26rpx;
+		margin-bottom: 10rpx;
+		
+		text {
+			color: $uni-text-color-placeholder;
+		}
+	}
+	
+	.feed-type {
+		margin-bottom: 20rpx;
+	}
+}
+
+:deep(.wd-textarea) {
+	padding: 0 !important;
+}

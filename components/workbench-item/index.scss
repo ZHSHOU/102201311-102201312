@@ -1,0 +1,23 @@
+.workbench-content {
+	margin: 20rpx;
+	background: #fff;
+	border-radius: 10rpx;
+	margin-top: 0;
+	
+	.workbench-title {
+		padding: 20rpx;
+		font-size: 26rpx;
+		color: $uni-text-color-placeholder;
+		border-bottom: 1rpx solid $uni-bgcolor-nav;
+		
+		.wd-icon {
+			color: $uni-color-theme;
+		}
+	}
+	
+	.workbench-icon {
+		width: 50rpx;
+		height: 50rpx;
+		margin: 0 auto 18rpx;
+	}
+}

@@ -1,0 +1,102 @@
+.wraper {
+	display: flex;
+	height: 100%;
+	overflow: hidden;
+	
+	.content {
+		width: 70%;
+		flex: 1;
+		background: #fff;
+		transition: transform 0.3s ease;
+	}
+	.category {
+		box-sizing: border-box;
+		height: 100%;
+		
+		.swiper {
+			height: 120px;
+			border-radius: 10rpx;
+			overflow: hidden;
+			
+			image {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+	
+	:deep(.wd-cell__wrapper) {
+		display: inline-block !important;
+		width: 100%;
+		padding-right: 20rpx;
+		box-sizing: border-box;
+	}
+	
+	:deep(.wd-cell__left) {
+		margin-right: 0 !important;
+	}
+	
+	:deep(.wd-sidebar) {
+		width: 30% !important;
+		flex-shrink: 0;
+	}
+	
+	:deep(.wd-sidebar-item) {
+		justify-content: left;
+		padding: 10rpx 20rpx !important;
+	}
+	
+	:deep(.wd-badge) {
+		word-wrap: break-word !important;
+		width: 100%;
+	}
+	
+	.load-text {
+		padding: 30rpx;
+		text-align: center;
+		font-size: 26rpx;
+		color: $uni-text-color-grey;
+	}
+}
+
+ :deep(.custom-button) {
+	min-width: auto !important;
+	box-sizing: border-box;
+	width: 80rpx !important;
+	height: 80rpx !important;
+	border-radius: 50% !important;
+	margin: 8rpx;
+}
+
+:deep(.wd-button__text) {
+	font-size: 12px !important;
+}
+
+:deep(.custom-radio) {
+	height: 32px !important;
+	line-height: 32px !important;
+}
+
+.categories-add-icon {
+	width: 120rpx;
+	height: 120rpx;
+	background: $uni-color-theme;
+	border-radius: 50%;
+	color: $uni-color-white;
+	position: fixed;
+	z-index: 100;
+	bottom: 150rpx;
+	right: 50rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 0 20rpx $uni-color-theme-shadow;
+}
+
+:deep(.uni-fab) {
+	box-shadow: 0 0 16rpx $uni-color-theme-shadow;
+}
+
+:deep(.uni-fab__content--other-platform) {
+	box-shadow: none;
+}

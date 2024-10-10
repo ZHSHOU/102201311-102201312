@@ -1,0 +1,15 @@
+// wot-design 主题色
+:root,
+page {
+	--wot-color-theme: #00bcff;
+	height: 100%;
+}
+
+button[type=primary] {
+	background-color: #00bcff;
+}
+
+view {
+	// 英文换行
+	word-wrap: break-word
+}

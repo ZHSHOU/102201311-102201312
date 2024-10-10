@@ -1,0 +1,31 @@
+.unregistered-content {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 60rpx;
+	  position: absolute;  
+	  top: 50%;  
+	  left: 50%;  
+	  transform: translate(-50%, -50%);
+	  margin-top: -200rpx;
+	
+	.title {
+		font-size: 30rpx;
+		font-weight: bold;
+		color: $uni-color-black;
+	}
+	
+	.domains {
+		margin-top: 60rpx;
+		font-size: 26rpx;
+		color: $uni-text-color-placeholder;
+		
+		view {
+			padding: 8rpx 0;
+		}
+	}
+	
+	.login-btn {
+		margin-top: 60rpx;
+		text-align: center;
+	}
+}
