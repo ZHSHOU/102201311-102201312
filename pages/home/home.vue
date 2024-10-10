@@ -151,7 +151,7 @@ const gotoDetail = (id: string | undefined) => {
 
 onShareAppMessage(() => {
 	return {
-		title: '旅拍路书，旅行爱好者必备旅拍记录工具',
+		title: '福大帮，这是福大人自己的项目管理应用！',
 		path: '/pages/home/home',
 	}
 })
