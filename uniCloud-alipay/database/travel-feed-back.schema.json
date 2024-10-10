@@ -1,0 +1,109 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": "auth.uid != null",
+		"update": "doc.user_id == auth.uid || 'SYSTEM_ADMIN' in auth.role",
+		"delete": "doc.user_id == auth.uid"
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"user_id": {
+			"bsonType": "string",
+			"description": "发聩作者ID， 参考`uni-id-users` 表",
+			"foreignKey": "uni-id-users._id",
+			"defaultValue": {
+				"$env": "uid"
+			}
+		},
+		"feedback_content": {
+			"bsonType": "string",
+			"title": "反馈内容",
+			"description": "反馈内容",
+			"label": "反馈内容",
+			"trim": "right"
+		},
+		"type": {
+			"bsonType": "int",
+			"title": "反馈类型",
+			"description": "1-产品使用问题 2-系统BUG 3-投诉 4-需求 5-其他",
+			"defaultValue": 5,
+			"enum": [
+				{
+					"value": 1,
+					"text": "产品使用问题"
+				},
+				{
+					"value": 2,
+					"text": "系统BUG"
+				},
+				{
+					"value": 3,
+					"text": "投诉"
+				},
+				{
+					"value": 4,
+					"text": "需求"
+				},
+				{
+					"value": 5,
+					"text": "其他"
+				}
+			]
+		},
+		"process_status": {
+			"bsonType": "int",
+			"title": "处理状态",
+			"description": "1-待处理 2-已处理 3-不予处理",
+			"defaultValue": 1,
+			"enum": [
+				{
+					"value": 1,
+					"text": "待处理"
+				},
+				{
+					"value": 2,
+					"text": "已处理"
+				},
+				{
+					"value": 3,
+					"text": "不予处理"
+				}
+			]
+		},
+		"process_result": {
+			"bsonType": "string",
+			"title": "处理结果",
+			"description": "处理结果",
+			"label": "处理结果",
+			"trim": "both"
+		},
+		"excerpt": {
+			"bsonType": "string",
+			"title": "反馈摘录",
+			"description": "反馈摘录",
+			"label": "摘要",
+			"trim": "both"
+		},
+		"publish_date": {
+			"bsonType": "timestamp",
+			"title": "发表时间",
+			"description": "发表时间",
+			"defaultValue": {
+				"$env": "now"
+			}
+		},
+		"publish_ip": {
+			"bsonType": "string",
+			"title": "发布文章时IP地址",
+			"description": "发表时 IP 地址",
+			"forceDefaultValue": {
+				"$env": "clientIP"
+			}
+		}
+	}
+}
