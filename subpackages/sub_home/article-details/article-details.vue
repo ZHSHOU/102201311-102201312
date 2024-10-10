@@ -15,7 +15,7 @@ const travelUtils = uniCloud.importObject("travel-utils", {
 const loadState = ref<boolean>(true);
 const artId = ref<string>("");
 const detailData = ref<ArticleType>();
-const richText = ref<string>("");我
+const richText = ref<string>("");
 const isLike = ref<boolean>(false);
 const lastTime = ref<number>(0);
 
@@ -240,7 +240,7 @@ let tableData = ref([
     user_name: "陈言泷", // 用户名
     user_avatar:
       "https://s2.loli.net/2024/10/10/SOqaM41PAxf6uXk.jpg", // 评论者头像地址
-    user_content: "目前人数（3/5），可以邮件我，我们具体聊聊", // 评论内容
+    user_content: "目前人数（2/3），可以邮件我，我们具体聊聊", // 评论内容
     is_like: false, // 是否点赞
     like_count: 16, // 点赞数统计
     create_time: "2024-10-10 10:30", // 创建时间
@@ -253,7 +253,7 @@ let tableData = ref([
     user_name: "陈言泷", // 用户名
     user_avatar:
       "https://s2.loli.net/2024/10/10/SOqaM41PAxf6uXk.jpg", // 评论者头像地址
-    user_content: "目前人数（3/5），可以邮件我，我们具体聊聊", // 评论内容
+    user_content: "目前人数（2/3），可以邮件我，我们具体聊聊", // 评论内容
     is_like: false, // 是否点赞
     like_count: 16, // 点赞数统计
     create_time: "2024-10-10 10:31", // 创建时间
