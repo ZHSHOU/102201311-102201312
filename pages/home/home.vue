@@ -11,14 +11,14 @@ const db = uniCloud.database();
 const dbCmb = db.command;
 let articList = ref<ArticleType[]>([]);
 const navList = reactive<TabType[]>([
-	{ title: "最新", name: "latest" },
 	{ title: "热门", name: "hot" },
+	{ title: "最新", name: "latest" },
 	{ title: "竞赛", name: "competition" },
 	{ title: "科研", name: "science" },
 	{ title: "创业", name: "job" },
 ])
-const active = ref<string>("latest");
-const currentTabName = ref<string>("latest");
+const active = ref<string>("hot");
+const currentTabName = ref<string>("hot");
 const loadText = ref<string>("");
 const queryParams = reactive({
 	page: 1,
